@@ -1,0 +1,18 @@
+
+      ;;;
+       ;;;
+        ;;;
+       ;;;;;
+      ;;; ;;;
+     ;;;   ;;;
+
+     +Memoization
+     +Lazy evaluation
+     +Big numbers
+     +Floating numbers
+     +Tail recursion
+     -Let form
+     -Cond form
+     +Make readable (a . b) exps
+     +repl via readline library
+     +call/cc
