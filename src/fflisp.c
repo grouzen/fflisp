@@ -35,7 +35,7 @@ static void usage(void)
 static void welcome(void)
 {
     printf("Welcome to FFLISP " VERSION
-           " <http://bitbucket.org/grouzen/fflisp/>.\n");
+           " <http://github.com/grouzen/fflisp/>.\n");
     printf("Nedokushev Michael <grouzen.hexy@gmail.com> (c) 2010.\n");
     printf("\n");
 
