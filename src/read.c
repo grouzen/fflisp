@@ -218,7 +218,7 @@ static struct lispobj *read_token(FILE *stream)
                     ERROR_ILLEGAL(c);
                 }
             } else if(token_type == SYMBOL) {
-                if(!IS_SYMBOL(c))
+                if(!IS_SYMBOL(c) && !IS_NUMBER(c))
                     ERROR_ILLEGAL(c);
             } else { // NUMBER
                 if(!IS_NUMBER(c))
