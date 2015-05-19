@@ -43,12 +43,11 @@
                    (fold-right proc start (cdr seq))))))
 
 ;; Find
-;; I really don't know why it don't work!
 (label find
        (lambda (item seq)
          (cond ((null seq) nil)
                ((equal item (car seq)) (car seq))
-               (find item (cdr seq)))))
+               (t (find item (cdr seq))))))
 
 ;; Length
 (label length
@@ -75,7 +74,7 @@
 (label find-if
        (lambda (pred seq)
          (cond ((null seq) nil)
-               ((pred (car seq)) (car seq))
+               ((pred (car seq)) (cons (car seq) (find-if pred (cdr seq))))
                (t (find-if pred (cdr seq))))))
 
 ;; Reverse

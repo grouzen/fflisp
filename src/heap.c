@@ -17,7 +17,7 @@ void heap_debug_object(struct lispobj *obj)
     if(obj == NULL) {
         printf(" null pointer");
     } else {
-        printf(" [0x%x ", obj);
+        printf(" [%p ", obj);
         if(OBJ_TYPE(obj) == SYMBOL) {
             printf("(symbol %s) ", SYMBOL_VALUE(obj));
         } else if(OBJ_TYPE(obj) == NUMBER) {
@@ -39,7 +39,7 @@ void heap_debug(void)
         i++;
     }
 
-    printf("\nTotal: %d objects (%d bytes).\n",
+    printf("\nTotal: %d objects (%z bytes).\n",
            i,
            i * sizeof(struct lispobj));
     
@@ -156,9 +156,11 @@ void symbol_table_debug(void)
 {
     struct lispobj *tmp_symt;
     tmp_symt = symbol_table;
+
+    printf("__DEBUG_SYMT__: symbol table:\n");
     
     while(tmp_symt != NULL) {
-        printf(" [%s %d] ",
+        printf("[%s %d]\n",
                SYMBOL_VALUE(CAR(tmp_symt)),
                OBJ_REFS(CAR(tmp_symt)));
         tmp_symt = CDR(tmp_symt);

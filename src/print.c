@@ -26,14 +26,14 @@ void print(struct lispobj *obj)
     } else {
         if(CAR(obj) == NEW_SYMBOL("PROC")) {
             printf("<procedure ");
-            if(CADR(obj) != NULL) {
+            if(CADR(obj) != NEW_SYMBOL("NIL")) {
                 print_list(CADR(obj));
             } else {
                 printf("()");
             }
-            printf(" 0x%x>", CADDDR(obj));
+            printf(" %p>", CADDDR(obj));
         } else if(CAR(obj) == NEW_SYMBOL("SUBR")) {
-            printf("<primitive-procedure 0x%x>", CADR(obj));
+            printf("<primitive-procedure %p>", CADR(obj));
         } else {
             print_list(obj);
         }

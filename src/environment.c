@@ -216,6 +216,7 @@ struct lispobj *env_init(void)
                                {">", subr_greatthan},
                                {"<", subr_lessthan},
                                {"/", subr_divide},
+                               {"MOD", subr_mod},
                                {"HEAP", subr_heap},
                                {"HEAP-OBJECT", subr_heap_object},
                                {"LOAD", subr_load},
@@ -235,7 +236,7 @@ struct lispobj *env_init(void)
     
     env_var_define(NEW_SYMBOL("T"), NEW_SYMBOL("T"), env);
     env_var_define(NEW_SYMBOL("NIL"), NULL, env);
-
+    
     return env;
 }
 

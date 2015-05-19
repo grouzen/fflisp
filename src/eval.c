@@ -147,7 +147,7 @@ struct lispobj *eval(struct lispobj *obj, struct lispobj *env)
 }
 
 struct lispobj *apply(struct lispobj *proc, struct lispobj *args)
-{   
+{    
     if(proc != NULL && OBJ_TYPE(proc) == CONS) {
         struct lispobj *ret;
         
@@ -156,7 +156,8 @@ struct lispobj *apply(struct lispobj *proc, struct lispobj *args)
             struct lispobj *body, *(*subr)(struct lispobj *);
 
             body = CADR(proc);
-            subr = (void *) NUMBER_VALUE(body);
+            subr = (struct lispobj *) NUMBER_VALUE(body);
+            //subr = (struct lispobj *) body;
 
             ret = heap_grab(subr(args));
         } else if(NEW_SYMBOL("PROC") == CAR(proc)) {
@@ -166,14 +167,14 @@ struct lispobj *apply(struct lispobj *proc, struct lispobj *args)
             body = CADDR(proc);
             params = CADR(proc);
             penv = CADDDR(proc);
-
+            
             if(length(params) == length(args)) {
                 struct lispobj *env;
 
-                if(params == NULL) {
+                if(params == NULL || params == NEW_SYMBOL("NIL")) {
                     env = penv;
 
-                    ret = eval(body, env);
+                    ret = eval_progn(body, env);
                 } else {
                     env = heap_grab(NEW_CONS(env_frame_make(params, args), penv));
 

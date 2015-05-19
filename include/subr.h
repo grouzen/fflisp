@@ -33,6 +33,7 @@ struct lispobj *subr_eql(struct lispobj*);
 struct lispobj *subr_list(struct lispobj*);
 struct lispobj *subr_plus(struct lispobj*);
 struct lispobj *subr_multi(struct lispobj*);
+struct lispobj *subr_mod(struct lispobj*);
 struct lispobj *subr_compar(struct lispobj*);
 struct lispobj *subr_greatthan(struct lispobj*);
 struct lispobj *subr_lessthan(struct lispobj*);

@@ -50,8 +50,8 @@ struct lispobj *list(int n, ...)
 int length(struct lispobj *list)
 {
     int n = 0;
-
-    while(list != NULL) {
+    
+    while(list != NULL && list != NEW_SYMBOL("NIL")) {
         list = CDR(list);
         n++;
     }
@@ -456,6 +456,27 @@ struct lispobj *subr_divide(struct lispobj *args)
     }
 
     return num;
+}
+
+struct lispobj *subr_mod(struct lispobj *args)
+{
+    if(length(args) != 2)
+        return ERROR_ARGS;
+    
+    struct lispobj *number, *div;
+
+    number = CAR(args);
+    div    = CADR(args);
+
+    if(OBJ_TYPE(number) == NUMBER && OBJ_TYPE(div) == NUMBER) {
+        char mod[30];
+        
+        snprintf(mod, 30, "%d", NUMBER_VALUE(number) % NUMBER_VALUE(div));
+        return NEW_NUMBER(mod);
+    } else {
+        return NEW_ERROR("Arguments must be numbers.\n");
+    }
+    
 }
 
 struct lispobj *subr_greatthan(struct lispobj *args)

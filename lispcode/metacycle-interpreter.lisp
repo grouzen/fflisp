@@ -52,7 +52,7 @@
              (error "Wrong number of arguments"))))
 
 (label mrepl
-       (lambda (noarg) ; non-argument functions are not supported yet
+       (lambda ()
          (display "meta-fflisp> ")
          (let ((input (read)))
            (if (eq input 'exit)
@@ -65,7 +65,7 @@
                                     'proc-env))
                      (display output))
                  (newline)
-                 (mrepl noarg))))))
+                 (mrepl))))))
        
 ;; User defined case.
 (label compound-procedure-p
@@ -89,6 +89,7 @@
              (list '- -)
              (list '* *)
              (list '/ /)
+             (list 'mod mod)
              (list '= =)
              (list '> >)
              (list '< <)))
